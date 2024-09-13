@@ -1,0 +1,45 @@
+<section class="container mx-auto  md:p-8 ">
+  <h1 class="text-4xl text-center m-10">{{ section.settings.title }}</h1>
+
+  <section class="p-5 md:p-0 grid  gap-10 items-start " style="grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+;">
+
+
+    {% for product in section.settings.featured_collection.products limit: section.settings.number_of_products_to_show %}
+      {% render 'product-card'
+        , product: product %}
+    {% endfor %}
+
+  </section>
+</section>
+
+{% schema %}
+  {
+    "name": "Featured Collection",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "default": "Featured Collection",
+        "label": "Title"
+      }, {
+        "type": "collection",
+        "id": "featured_collection",
+        "label": "Collection"
+      }, {
+        "type": "range",
+        "id": "number_of_products_to_show",
+        "label": "Number of products to show",
+        "min": 4,
+        "max": 12,
+        "step": 1,
+        "default": 6
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured Collection"
+      }
+    ]
+  }
+{% endschema %}

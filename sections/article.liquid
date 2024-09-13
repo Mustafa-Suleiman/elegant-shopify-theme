@@ -1,0 +1,86 @@
+<div class="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16 relative">
+
+  {% comment %} cover {% endcomment %}
+  <div class="bg-cover bg-center text-center overflow-hidden" style="min-height: 500px; background-image: url('{{article.image |  image_url: width: 450}}')"></div>
+  {% comment %} blog body {% endcomment %}
+  <div class="max-w-3xl mx-auto">
+    <div class="mt-3 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-between leading-normal">
+      <div class="bg-white relative top-0 -mt-32 p-5 sm:p-10">
+        <h1 href="#" class="text-gray-900 font-bold text-3xl mb-2">{{ article.title }}</h1>
+        {% if section.settings.enable_author %}
+          <p class="text-gray-700 text-xs mt-2 inline-block">Written By:
+
+            <a href="#" class="text-rose-500 font-medium hover:text-gray-900 transition duration-500 ease-in-out">
+              {{ article.author }}
+            </a>
+          </p>
+        {% endif %}
+        {% if section.settings.enable_published_date %}
+          <time class="text-gray-500 text-xs font-medium" datetime="{{article.published_at | date: "%y-%m-%d"}}">
+            On {{ article.published_at | date: format: "abbreviated_date" }}
+          </time>
+        {% endif %}
+
+        <p class="text-base-content leading-8 my-5 ">
+          {{ article.content }}
+
+
+        </p>
+
+        {% for tag in article.tags %}
+          <a href="#" class="text-xs text-indigo-600 font-medium hover:text-gray-900 transition duration-500 ease-in-out">
+            #{{ tag }}</a>
+        {% endfor %}
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Template Article",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_author",
+        "label": "Display Author Name",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "enable_published_date",
+        "label": "Display Published Date",
+        "default": true
+      }
+    ],
+    "blocks": [
+      {
+        "type": "article_title",
+        "name": "Title",
+        "limit": 1
+      },
+      {
+        "type": "article_author",
+        "name": "Author",
+        "limit": 1
+      },
+      {
+        "type": "article_published_date",
+        "name": "Published Date",
+        "limit": 1
+      },
+      {
+        "type": "featured_image",
+        "name": "Thumbnail",
+        "limit": 1
+      }, {
+        "type": "article_content",
+        "name": "Content",
+        "limit": 1
+      }
+
+    ]
+  }
+{% endschema %}

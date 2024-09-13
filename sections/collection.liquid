@@ -1,0 +1,13 @@
+<section class="container mx-auto  md:p-8 ">
+  <h1 class="text-4xl text-center m-10">{{ collection.title }}</h1>
+
+  <section class="p-5 md:p-0 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10 items-start ">
+
+
+    {% for product in collection.products %}
+      {% render 'product-card'
+        , product: product %}
+    {% endfor %}
+
+  </section>
+</section>

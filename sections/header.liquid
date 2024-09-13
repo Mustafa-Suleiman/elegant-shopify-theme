@@ -62,9 +62,11 @@
                 <a href="{{link.url}}">{{ link.title }}</a>
               </summary>
               <ul class="bg-base-100 rounded-t-none p-2">
-                <li>
-                  <a href="{{link.url}}">All</a>
-                </li>
+                {% if link.url != "#" %}
+                  <li>
+                    <a href="{{link.url}}">All</a>
+                  </li>
+                {% endif %}
                 {% for nested in link.links %}
                   <li>
                     <a href="{{nested.url}}">{{ nested.title }}</a>
